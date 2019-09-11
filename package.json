@@ -1,0 +1,30 @@
+{
+  "name": "testnode",
+  "version": "1.0.1",
+  "description": "This is a test ",
+  "main": "main.js",
+  "scripts": {
+    "test": "testCommandMain"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paskalk/testnode.git"
+  },
+  "keywords": [
+    "mobileapplications"
+  ],
+  "author": "Pascal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paskalk/testnode/issues"
+  },
+  "homepage": "https://github.com/paskalk/testnode#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "webpack": "^4.39.3"
+  }
+}

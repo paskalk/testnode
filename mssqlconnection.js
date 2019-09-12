@@ -17,12 +17,14 @@ db.connect(error => {
 
     const request = new mssql.Request(db)
     request.query('select id from prelab', (err, result) => {
-        // ... error checks
+        
         if (err) console.log(err);
 
-    console.log(result) // return 1
+        console.log(result) 
 
-    // ...
+
 })
 })
+
+db.close();
 

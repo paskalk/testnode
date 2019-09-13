@@ -6,9 +6,6 @@ const port ='3000';
 
 
 const server = http.createServer( (request, response) => {
-    // response.statusCode = 200;
-    // response.setHeader('Content-Type', 'text/html');
-    // response.end('<!doctype html> <html lang="en"><table><th>Names</th><tr><td>Hello World</td><tr></table>');
 
     fs.readFile(__dirname + '/index.html', function(error, data) {  
       if (error) {  

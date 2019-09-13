@@ -23,7 +23,7 @@ var namesFromDb = "";
         request.query('select names from prelab', (err, result) => {
             
             if (err) console.log(err);
-            console.log(result.recordsets);
+            //sconsole.log(result.recordsets);
             namesFromDb = JSON.stringify(result.recordset);
     
     })

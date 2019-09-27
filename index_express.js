@@ -1,45 +1,56 @@
 var app = require('express')();
 
-const mssql = require('mssql');
+const sql = require('mssql');
 const express = require('express');
 
-const db = new mssql.ConnectionPool({
+const pool = new sql.ConnectionPool({
     user: 'sa',
     password: 'techagri@2014',
     server: 'localhost',
     database: 'node'
 })
-
-var namesFromDb = "";
-
-    db.connect(error => {
-        if (error){
-            throw error;
-        }
     
-        console.log('connection established');
-    
-        const request = new mssql.Request(db)
-        request.query('select names from prelab', (err, result) => {
-            
-            if (err) console.log(err);
-            //sconsole.log(result.recordsets);
-            namesFromDb = JSON.stringify(result.recordset);
-    
-    })
-    })
-
-    console.log(namesFromDb);
-    
-
 
 app.get('/', function(request, response){
     response.sendFile(__dirname +'/index_to_db.html');
 });
 
 app.get('/getName', function(request, response){
-    response.json({ name: namesFromDb });
+    sql.connect(config)
+    .then((conn) => 
+        conn.query("SELECT * FROM measurements")
+            .then((v) => console.log(v))
+            .then(() => conn.close()))
+   
+
+
 });
 
 
+app.get('/getMeasurements', function(request, response){
+   
+    var conn = pool;
+    
+    conn.connect().then(function () {
+
+        var req = new sql.Request(conn);
+        req.query("SELECT * FROM measurements").then(function (recordset) {
+            //console.log(recordset);
+            conn.close();
+            return response.json(recordset);
+        })
+            .catch(function (err) {
+                console.log(err);
+                conn.close();
+            });
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
+
+    
+
+});
+
 app.listen('3000'); 
+

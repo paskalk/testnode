@@ -35,9 +35,13 @@ app.get('/getMeasurements', function(request, response){
 
         var req = new sql.Request(conn);
         req.query("SELECT * FROM measurements").then(function (recordset) {
-            //console.log(recordset);
+            
             conn.close();
-            return response.json(recordset);
+            
+            response.header("Access-Control-Allow-Origin", "*");
+console.log(recordset["recordsets"][0]);
+            //return response.json({data: recordset["recordsets"]});
+            return response.json(recordset.recordsets[0]);
         })
             .catch(function (err) {
                 console.log(err);

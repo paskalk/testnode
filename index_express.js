@@ -34,12 +34,12 @@ app.get('/getMeasurements', function(request, response){
     conn.connect().then(function () {
 
         var req = new sql.Request(conn);
-        req.query("SELECT * FROM measurements").then(function (recordset) {
+        req.query("SELECT top 5 * FROM measurements order by unix_timestamp desc").then(function (recordset) {
             
             conn.close();
             
             response.header("Access-Control-Allow-Origin", "*");
-console.log(recordset["recordsets"][0]);
+            //console.log(recordset["recordsets"][0]);
             //return response.json({data: recordset["recordsets"]});
             return response.json(recordset.recordsets[0]);
         })
